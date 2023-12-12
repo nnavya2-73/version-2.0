@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport"content="width=device-width,initial-scale=1">
+<meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+body{
+ background-image: url('go.jfif');
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: 100% 100%;
+}
+.mySlides{
+display:block;
+margin-right:auto;
+margin-left:auto;
+
+}
+ 
+</style>
+</head>
+
+<body>
+
+
+
+<div class="w3-content w3-section"style="max-width:2000px">
+<img class="mySlides"src="varn.jpg"style="width:50%"height="700">
+<img class="mySlides"src="uni.jpeg"style="width:50%"height="700">
+<img class="mySlides"src="tennis.png"style="width:50%"height="700">
+<img class="mySlides"src="light.jpeg"style="width:50%"height="700">
+<img class="mySlides"src="h.jpg"style="width:50%"height="700">
+<img class="mySlides"src="clg.png"style="width:50%"height="700">
+<img class="mySlides"src="ma.jpg"style="width:50%"height="700">
+<img class="mySlides"src="lib.jpg"style="width:50%"height="700">
+<img class="mySlides"src="aga.jpeg"style="width:50%"height="700">
+<img class="mySlides"src="level.jpg"style="width:50%"height="700">
+</div>
+
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+var i;
+var x=document.getElementsByClassName("mySlides");
+for(i=0;i < x.length;i++) {
+x[i].style.display="none";
+}
+myIndex++;
+if(myIndex > x.length) {myIndex=1}
+x[myIndex-1].style.display="block";
+setTimeout(carousel,500);
+}
+</script>
+</body>
+</html>
