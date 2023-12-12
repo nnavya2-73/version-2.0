@@ -1,0 +1,174 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks Sheet</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .marks-sheet {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .subject-input {
+            display: inline-block;
+            width: calc(100% - 10px);
+            margin-right: 10px;
+        }
+
+        .result-container {
+            text-align: center;
+            border: 2px solid #333;
+            padding: 20px;
+        }
+
+        .chart-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="marks-sheet">
+    <h2>Marks Sheet</h2>
+
+    <div class="input-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+    </div>
+
+    <div class="input-group">
+        <label for="rollNumber">Roll Number:</label>
+        <input type="text" id="rollNumber" required>
+    </div>
+
+    <div class="input-group">
+        <h3>Enter Marks for Each Subject:</h3>
+        <!-- Input fields for eight subjects -->
+        <!-- You can customize the subject names as needed -->
+        <div class="subject-input">
+            <label for="subject1">Subject 1:</label>
+            <input type="number" id="subject1" required>
+        </div>
+
+        <div class="subject-input">
+            <label for="subject2">Subject 2:</label>
+            <input type="number" id="subject2" required>
+        </div>
+             <div class="subject-input">
+            <label for="subject3">Subject 3:</label>
+            <input type="number" id="subject3" required>
+        </div>
+  <div class="subject-input">
+            <label for="subject4">Subject 4:</label>
+            <input type="number" id="subject4" required>
+        </div>
+  <div class="subject-input">
+            <label for="subject5">Subject 5:</label>
+            <input type="number" id="subject5" required>
+        </div>
+  <div class="subject-input">
+            <label for="subject6">Subject 6:</label>
+            <input type="number" id="subject6" required>
+        </div>
+  <div class="subject-input">
+            <label for="subject7">Subject 7:</label>
+            <input type="number" id="subject7" required>
+        </div>
+  <div class="subject-input">
+            <label for="subject8">Subject 8:</label>
+            <input type="number" id="subject8" required>
+        </div>
+
+    </div>
+
+    <button onclick="generateResult()">Generate Result</button>
+
+    <div id="resultOutput" class="result-container" style="display: none;">
+        <div id="result-info" class="result-info"></div>
+        <div id="chart-container" class="chart-container">
+            <canvas id="marksChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    function generateResult() {
+        // Get user input
+        const name = document.getElementById('name').value;
+        const rollNumber = document.getElementById('rollNumber').value;
+
+        // Initialize an array to store marks for each subject
+        const marksArray = [];
+        
+        // Loop through the input fields for subjects and calculate average
+        for (let i = 1; i <= 8; i++) {
+            const marks = parseFloat(document.getElementById(`subject${i}`).value);
+            marksArray.push(marks);
+        }
+
+        // Calculate average marks
+        const averageMarks = marksArray.reduce((acc, mark) => acc + mark, 0) / marksArray.length;
+
+        // Determine grade based on average marks (you can customize this logic)
+        let grade;
+        if (averageMarks >= 90) {
+            grade = 'A+';
+        } else if (averageMarks >= 80) {
+            grade = 'A';
+        } else if (averageMarks >= 70) {
+            grade = 'B';
+        } else {
+            grade = 'C';
+        }
+
+        // Display result information
+        const resultInfo = document.getElementById('result-info');
+        resultInfo.innerHTML = `<p>Name: ${name}</p><p>Roll Number: ${rollNumber}</p>`;
+        resultInfo.innerHTML += `<p>Average Marks: ${averageMarks.toFixed(2)}%</p><p>Grade: ${grade}</p>`;
+
+        // Display the result output container
+        document.getElementById('resultOutput').style.display = 'block';
+
+        // Draw the bar chart
+        drawBarChart(marksArray);
+    }
+
+    function drawBarChart(marksArray) {
+        const ctx = document.getElementById('marksChart').getContext('2d');
+
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Subject 1', 'Subject 2', 'Subject 3', 'Subject 4', 'Subject 5', 'Subject 6', 'Subject 7', 'Subject 8'],
+                datasets: [{
+                    label: 'Marks',
+                    data: marksArray,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
